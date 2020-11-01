@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CW3
 {
-    public class Complex<T> 
+    public class Complex<T>  
     {
         private T real;
         private T imaginary;
