@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CW3
 {
     public class Matrix <T>
-        where T: IComparable<T>, IEquatable<T>, IConvertible, IFormattable, IComparable 
-
+        where T: IConvertible, IFormattable, IComparable
     {
         protected T[,] matrix;
         protected int n;
@@ -52,7 +47,7 @@ namespace CW3
             {
                 for (int j = 0; j < m; j++)
                 {
-                    Console.Write(res.GetElement(i, j) + " ");
+                    Console.Write(res.GetElement(i, j).ToString() + " ");
                 }
                 Console.WriteLine();
             }
@@ -76,20 +71,22 @@ namespace CW3
             dynamic mult2;
 
             for (int i = 0; i < this.n; ++i)
-            {
-                for (int j = 0; j < m; ++j)
-                {
-                    res.SetElement(i, j, zero);
-                }
-            }
-
-            for (int i = 0; i < this.n; ++i)
                 for (int j = 0; j < m; ++j)
                     for (int k = 0; k < this.m; ++k)
                     {
                         mult1 = this.GetElement(i, k);
                         mult2 = matrix2.GetElement(k, j);
-                        element = res.GetElement(i, j) + mult1 * mult2;
+
+                        try
+                        {
+                            element = res.GetElement(i, j) + mult1 * mult2;
+                        }
+                        catch
+                        {
+                            element = mult1 * mult2;
+                        }
+
+                       
                         res.SetElement(i,j, element);
                     }
             
@@ -97,7 +94,7 @@ namespace CW3
             {
                 for(int j=0; j<m; j++)
                 {
-                    Console.Write(res.GetElement(i, j) + " ");
+                    Console.Write(res.GetElement(i, j).ToString() + " ");
                 }
                 Console.WriteLine();
             }
@@ -106,7 +103,7 @@ namespace CW3
 
         public void SetElement(int i, int j, T value)
         {
-            this.matrix[i, j] = value;
+            this.matrix[i, j] = (T)value;
         }
         public T GetElement(int i, int j)
         {
@@ -115,7 +112,7 @@ namespace CW3
     }
 
     public class SquareMatrix<T> : Matrix<T>
-        where T : struct, IComparable<T>, IEquatable<T>, IConvertible, IFormattable, IComparable
+        where T : IConvertible, IFormattable, IComparable
     {
         public SquareMatrix(int n) : base(n, n)
         { }
@@ -135,4 +132,6 @@ namespace CW3
             return true;
         }
     }
+
+
 }

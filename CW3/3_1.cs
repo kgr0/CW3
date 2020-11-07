@@ -1,24 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace CW3
 {
-    class Rectangle1
+    public abstract class Shape
+    {
+        public abstract int GetArea();
+    }
+    class Rectangle : Shape
     {
         public int Height { get; set; }
         public int Width { get; set; }
-        public int GetArea()
+        public override int GetArea()
         {
             return Width * Height;
         }
     }
-    class Square1
+    class Square : Shape
     {
         public virtual int SideLength { get; set; }
-       public int GetArea()
+       public override int GetArea()
         {
             return SideLength * SideLength;
         }
